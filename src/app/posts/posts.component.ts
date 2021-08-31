@@ -12,13 +12,13 @@ import { IPost } from './IPost';
 })
 export class PostsComponent implements OnInit {
   posts: IPost[] = [];
-  private url: string = "https://aajsonplaceholder.typicode.com/posts";
+  private url: string = "https://jsonplaceholder.typicode.com/posts";
 
   constructor(private service: PostService) { 
   }
 
   ngOnInit() {
-    this.service.getPosts()
+    this.service.getAll()
       .subscribe(
         response => { //console.log(response);
           this.posts = response as [];
@@ -28,7 +28,7 @@ export class PostsComponent implements OnInit {
   createPost(input: HTMLInputElement){
     let post: IPost = { title: input.value, id: 1 };
 
-    this.service.createPost(post)
+    this.service.create(post)
       .subscribe(
         response => {
           post.id = response.id;
@@ -44,7 +44,7 @@ export class PostsComponent implements OnInit {
   }
 
   updatePost(post: IPost){
-    this.service.updatePost(post)
+    this.service.update(post)
       .subscribe(
         response => {
           console.log(response);
@@ -53,7 +53,7 @@ export class PostsComponent implements OnInit {
 
   deletePost(post: IPost){
     let id: number = post.id;
-    this.service.deletePost('aa')
+    this.service.delete(id)
       .subscribe(
         response => {
           let index: number = this.posts.indexOf(post);
