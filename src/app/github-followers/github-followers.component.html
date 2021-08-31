@@ -1,0 +1,19 @@
+<!-- Media object -->
+<div *ngFor="let follower of followers" class="d-flex">
+    <!-- Image -->
+    <img
+      src="{{follower.avatar_url}}" 
+      alt="John Doe"
+      class="me-3 rounded-circle"
+      style="width: 70px; height: 70px;"
+    />
+    <!-- Body -->
+    <div>
+        <h5 class="fw-bold">
+        {{follower.login}}
+        <!-- <small class="text-muted">Posted on February 19, 2021</small> -->
+        </h5>
+        <p> <a>{{ follower.html_url }}</a> </p>
+    </div>
+  </div>
+  <!-- Media object -->
