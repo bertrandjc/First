@@ -1,4 +1,3 @@
-import { error } from '@angular/compiler/src/util';
 import { Component, OnInit } from '@angular/core';
 import { AppError } from '../app-errors';
 import { BadRequestError } from '../badRequest-errors';
@@ -13,7 +12,7 @@ import { IPost } from './IPost';
 })
 export class PostsComponent implements OnInit {
   posts: IPost[] = [];
-  private url: string = "https://aaajsonplaceholder.typicode.com/posts";
+  private url: string = "https://aajsonplaceholder.typicode.com/posts";
 
   constructor(private service: PostService) { 
   }
@@ -23,9 +22,6 @@ export class PostsComponent implements OnInit {
       .subscribe(
         response => { //console.log(response);
           this.posts = response as [];
-    }, error => {
-          alert('An unexpected error occurred in getData!');
-          console.log(error);
     });
   }
 
@@ -43,10 +39,7 @@ export class PostsComponent implements OnInit {
           alert('Bad request!');
           //this.form.setErrors(error.originalError.json())  
         }
-        else {
-          alert('An unexpected error occurred!');
-          console.log(error);
-        }         
+        else throw error;        
       });
   }
 
@@ -55,15 +48,11 @@ export class PostsComponent implements OnInit {
       .subscribe(
         response => {
           console.log(response);
-        }, 
-        error => {
-          alert('An unexpected error occurred!');
-          console.log(error);
-      });
+        });
   }
 
   deletePost(post: IPost){
-    let id: number = 14045555;   //post.id;
+    let id: number = post.id;
     this.service.deletePost('aa')
       .subscribe(
         response => {
@@ -74,10 +63,7 @@ export class PostsComponent implements OnInit {
         (error: AppError) => {
           if(error instanceof NotFoundError)
             alert('This post has already been deleted.');
-          else {
-            alert('An unexpected error occurred!');
-            console.log(error);
-          }         
+          else throw error;
         });
   }
   

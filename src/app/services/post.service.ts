@@ -14,7 +14,6 @@ export class PostService {
   private url: string = "https://jsonplaceholder.typicode.com/posts";
   
   constructor(private http: HttpClient) { 
-  
   }
  
   getPosts() {
@@ -23,12 +22,7 @@ export class PostService {
   
   createPost(post: IPost){
     return this.http.post<IPost> (this.url, JSON.stringify(post)).pipe(
-      catchError((error: Response) => {
-        if (error.status === 400)
-          return throwError(new BadRequestError(error));
-        
-        return throwError(new AppError(error));
-      }));
+      catchError(this.handlerError));
   }
 
   updatePost(post: IPost){
@@ -36,14 +30,20 @@ export class PostService {
   }
 
   deletePost(id: any){
-    alert(id);
     return this.http.delete(this.url + '/' + id).pipe(
-      catchError((error: Response) => {
-        if (error.status === 404)
-          return throwError(new NotFoundError(error));
-        
-        return throwError(new AppError(error));
-      }));
+      catchError(this.handlerError));
+  } 
+
+  private handlerError(error: Response){
+
+    if (error.status === 400)
+      return throwError(new BadRequestError(error));
+
+    if (error.status === 404)
+      return throwError(new NotFoundError(error));
+
+    return throwError(new AppError(error));
+
   }
 
 }
