@@ -10,10 +10,10 @@
     <!-- Body -->
     <div>
         <h5 class="fw-bold">
-        {{follower.login}}
+          <a [routerLink]="['/followers', follower.id, follower.login]">{{follower.login}}</a>
         <!-- <small class="text-muted">Posted on February 19, 2021</small> -->
         </h5>
-        <p> <a>{{ follower.html_url }}</a> </p>
+        <p><a href="follower.html_url" >{{ follower.html_url }}</a></p>
     </div>
   </div>
   <!-- Media object -->

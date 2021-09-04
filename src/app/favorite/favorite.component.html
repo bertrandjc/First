@@ -1,0 +1,28 @@
+<!--  
+  -----Way 0 (old Bootstrap)!-------
+ 
+ <span 
+  class="glyphicon"
+  [ngClass]="{
+    'glyphicon-star': isSelected,
+    'glyphicon-star-empty': !isSelected
+  }"
+  (click)="onClick()"
+  ></span>
+
+  ------Way 1------------
+    <b>
+        <span 
+            [class.far]="!isSelected" 
+            [class.fas]="isSelected" class= "fa-star"
+            (click)="onClick()"></span>
+    </b>
+ 
+way 2 NEW Bootstrap 5!-->
+<b>
+  <span [ngClass]="{ 'fas': isSelected, 'far': !isSelected }"
+       class= "fa-star"
+      (click)="onClick()"></span>
+</b>
+
+

@@ -1,0 +1,52 @@
+<form #f="ngForm" (ngSubmit)="submit(f)" style="margin-bottom:20px;">
+
+  <div ngModelGroup="contact" #contact="ngModelGroup">
+      <div *ngIf="contact.valid" class="form-group"></div>
+
+      <div class="form-group">
+          <label for="firstName">First Name</label>
+          <input required minlength="3" 
+                 maxlength="10" 
+                 pattern="banana" 
+                 ngModel 
+                 id="firstName" #firstName="ngModel" (change)="log(firstName)" name="firstName" type="text" class="form-control"/>
+          <div class="alert alert-danger" *ngIf="firstName.touched && !firstName.valid">
+              <div *ngIf="firstName.errors?.required">First Name is required!</div>
+              <div *ngIf="firstName.errors?.minlength">Min 3!</div>
+              <div *ngIf="firstName.errors?.maxlength">Max 10!</div>
+          </div>
+      </div>
+
+      <div class="form-group">
+          <label for="comments">Last Name</label>
+          <textarea id="comments"  ngModel id="comments" #comments="ngModel" (change)="log(comments)" name="comments" type="text" cols="30" rows="10" class="form-control"></textarea>
+      </div>
+
+      <div class="checkbox">
+          <label >
+              <input type="checkbox" ngModel name="isSubscribed">Subscribe to mailing list
+          </label>
+      </div>
+
+      <div class="radio">
+          <label for="contactMethod">Choix:
+              <input type="radio" ngModel name="contactMethod" id="contactMethod" class="form-control"/>
+              Email
+          </label>
+      </div>
+
+      <div class="form-group">
+          <label for="contactMethod">Choix:</label>
+          <select multiple ngModel name="contactMethod" id="contactMethod" class="form-control">
+              <option value=""></option>
+              <option *ngFor="let method of contactMethods" [value]="method.id">{{ method.name }}</option>
+          </select>
+      </div>
+      <p>
+          {{f.value | json}}
+      </p>
+
+  </div>
+
+  <button class="btn btn-primary" style="margin-top: 10px;" [disabled]="!f.valid">Submit</button>
+</form>

@@ -1,7 +1,7 @@
 import { Component, OnInit } from '@angular/core';
-import { AppError } from '../app-errors';
-import { BadRequestError } from '../badRequest-errors';
-import { NotFoundError } from '../not-found-errors';
+import { AppError } from '../common/app-error';
+import { BadRequestError } from '../common/badRequest-errors';
+import { NotFoundError } from './../common/not-found-error';
 import { PostService } from '../services/post.service';
 import { IPost } from './IPost';
 

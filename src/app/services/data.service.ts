@@ -2,9 +2,9 @@ import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { Observable, throwError} from 'rxjs';
 import { catchError, map } from 'rxjs/operators';
-import { AppError } from '../app-errors';
-import { NotFoundError } from '../not-found-errors';
-import { BadRequestError } from '../badRequest-errors';
+import { AppError } from './../common/app-error';
+import { NotFoundError } from './../common/not-found-error';
+import { BadRequestError } from '../common/badRequest-errors';
 
 export class DataService {
       
